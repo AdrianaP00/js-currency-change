@@ -2,26 +2,23 @@ const prompt = require('prompt-sync')();
 
 const amount = parseFloat(prompt('Enter the amount to convert: '));
 
-let fromCurrency = 0;
-do {
-  fromCurrency = prompt('Enter the currency to convert from (EUR, USD, GBP, JPY): ').toUpperCase();
-} while (fromCurrency != 'EUR' &&
-         fromCurrency != 'USD' &&
-         fromCurrency != 'GBP' &&
-         fromCurrency != 'JPY');
-
-let toCurrency = 0;
-do {
-  toCurrency = prompt('Enter the currency to convert to (EUR, USD, GBP, JPY): ').toUpperCase();
-} while (toCurrency != 'EUR' &&
-         toCurrency != 'USD' &&
-         toCurrency != 'GBP' &&
-         toCurrency != 'JPY');
-
+let fromCurrency = currencyInputControl('Enter the currency to convert from (EUR, USD, GBP, JPY): ');
+let toCurrency = currencyInputControl('Enter the currency to convert to (EUR, USD, GBP, JPY): ');
 console.log(convertCurrency(amount, fromCurrency, toCurrency));
 
-function convertCurrency(amount, fromCurrency, toCurrency) {
+function currencyInputControl(promptMessage){
+  let currency = 0;
+  do {
+    currency = prompt(promptMessage).toUpperCase();
+  } while (currency != 'EUR' &&
+           currency != 'USD' &&
+           currency != 'GBP' &&
+           currency != 'JPY');
 
+  return currency;
+}
+
+function convertCurrency(amount, fromCurrency, toCurrency) {
   let exchangeRate = 0;
 
   switch (fromCurrency) {
@@ -40,7 +37,6 @@ function convertCurrency(amount, fromCurrency, toCurrency) {
           return NaN;
       }
       break;
-
     case 'USD':
       switch (toCurrency) {
         case 'EUR':
@@ -56,7 +52,6 @@ function convertCurrency(amount, fromCurrency, toCurrency) {
           return NaN;
       }
       break;
-
     case 'GBP':
       switch (toCurrency) {
         case 'EUR':
@@ -72,7 +67,6 @@ function convertCurrency(amount, fromCurrency, toCurrency) {
           return NaN;
       }
       break;
-
     case 'JPY':
       switch (toCurrency) {
         case 'EUR':
@@ -88,7 +82,6 @@ function convertCurrency(amount, fromCurrency, toCurrency) {
           return NaN;
       }
       break;
-
     default:
       return NaN;
   }

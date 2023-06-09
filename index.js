@@ -1,8 +1,8 @@
 const prompt = require('prompt-sync') (); 
 
-const amount = prompt('Enter the amount to convert: ');
-const fromCurrency = prompt('Enter the currency to convert from (EUR, USD, GBP, JPY): ');
-const toCurrency = prompt('Enter the currency to convert to (EUR, USD, GBP, JPY): ');
+const amount = parseFloat(prompt('Enter the amount to convert: '));
+const fromCurrency = prompt('Enter the currency to convert from (EUR, USD, GBP, JPY): ').toUpperCase();
+const toCurrency = prompt('Enter the currency to convert to (EUR, USD, GBP, JPY): ').toUpperCase();
 console.log(convertCurrency(amount, fromCurrency, toCurrency));
 
 function convertCurrency(amount, fromCurrency, toCurrency) {

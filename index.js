@@ -1,19 +1,26 @@
-const prompt = require('prompt-sync')();
+const prompt = require("prompt-sync")();
 
-const amount = parseFloat(prompt('Enter the amount to convert: '));
+const amount = parseFloat(prompt("Enter the amount to convert: "));
 
-let fromCurrency = currencyInputControl('Enter the currency to convert from (EUR, USD, GBP, JPY): ');
-let toCurrency = currencyInputControl('Enter the currency to convert to (EUR, USD, GBP, JPY): ');
+let fromCurrency = currencyInputControl(
+  "Enter the currency to convert from (EUR, USD, GBP, JPY): "
+);
+let toCurrency = currencyInputControl(
+  "Enter the currency to convert to (EUR, USD, GBP, JPY): "
+);
+
 console.log(convertCurrency(amount, fromCurrency, toCurrency));
 
-function currencyInputControl(promptMessage){
+function currencyInputControl(promptMessage) {
   let currency = 0;
   do {
     currency = prompt(promptMessage).toUpperCase();
-  } while (currency != 'EUR' &&
-           currency != 'USD' &&
-           currency != 'GBP' &&
-           currency != 'JPY');
+  } while (
+    currency != "EUR" &&
+    currency != "USD" &&
+    currency != "GBP" &&
+    currency != "JPY"
+  );
 
   return currency;
 }
@@ -22,62 +29,62 @@ function convertCurrency(amount, fromCurrency, toCurrency) {
   let exchangeRate = 0;
 
   switch (fromCurrency) {
-    case 'EUR':
+    case "EUR":
       switch (toCurrency) {
-        case 'USD':
+        case "USD":
           exchangeRate = 1.17;
-          break;
-        case 'GBP':
+          return amount * exchangeRate + "$";
+        case "GBP":
           exchangeRate = 0.85;
-          break;
-        case 'JPY':
+          return amount * exchangeRate + "£";
+        case "JPY":
           exchangeRate = 130.0;
-          break;
+          return amount * exchangeRate + "¥";
         default:
           return NaN;
       }
       break;
-    case 'USD':
+    case "USD":
       switch (toCurrency) {
-        case 'EUR':
+        case "EUR":
           exchangeRate = 0.85;
+          return amount * exchangeRate + "€";
           break;
-        case 'GBP':
+        case "GBP":
           exchangeRate = 0.73;
-          break;
-        case 'JPY':
+          return amount * exchangeRate + "£";
+        case "JPY":
           exchangeRate = 110.0;
-          break;
+          return amount * exchangeRate + "¥";
         default:
           return NaN;
       }
       break;
-    case 'GBP':
+    case "GBP":
       switch (toCurrency) {
-        case 'EUR':
+        case "EUR":
           exchangeRate = 1.18;
-          break;
-        case 'USD':
+          return amount * exchangeRate + "€";
+        case "USD":
           exchangeRate = 1.37;
-          break;
-        case 'JPY':
+          return amount * exchangeRate + "$";
+        case "JPY":
           exchangeRate = 150.0;
-          break;
+          return amount * exchangeRate + "¥";
         default:
           return NaN;
       }
-      break;
-    case 'JPY':
+    case "JPY":
       switch (toCurrency) {
-        case 'EUR':
+        case "EUR":
           exchangeRate = 0.0077;
-          break;
-        case 'USD':
+          return amount * exchangeRate + "€";
+        case "USD":
           exchangeRate = 0.0091;
-          break;
-        case 'GBP':
+          return amount * exchangeRate + "$";
+        case "GBP":
           exchangeRate = 0.0067;
-          break;
+          return amount * exchangeRate + "£";
         default:
           return NaN;
       }

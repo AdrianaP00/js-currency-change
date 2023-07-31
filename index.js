@@ -27,18 +27,18 @@ function currencyInputControl(promptMessage) {
 
 function convertCurrency(amount, fromCurrency, toCurrency) {
   let exchangeRate = 0;
+  
 
   switch (fromCurrency) {
     case "EUR":
       switch (toCurrency) {
         case "USD":
-          exchangeRate = 1.17;
           return amount * exchangeRate + "$";
         case "GBP":
-          exchangeRate = 0.85;
+          exchangeRate 
           return amount * exchangeRate + "£";
         case "JPY":
-          exchangeRate = 130.0;
+          exchangeRate 
           return amount * exchangeRate + "¥";
         default:
           return NaN;
@@ -47,14 +47,14 @@ function convertCurrency(amount, fromCurrency, toCurrency) {
     case "USD":
       switch (toCurrency) {
         case "EUR":
-          exchangeRate = 0.85;
+          exchangeRate 
           return amount * exchangeRate + "€";
           break;
         case "GBP":
-          exchangeRate = 0.73;
+          exchangeRate 
           return amount * exchangeRate + "£";
         case "JPY":
-          exchangeRate = 110.0;
+          exchangeRate  
           return amount * exchangeRate + "¥";
         default:
           return NaN;
@@ -63,13 +63,13 @@ function convertCurrency(amount, fromCurrency, toCurrency) {
     case "GBP":
       switch (toCurrency) {
         case "EUR":
-          exchangeRate = 1.18;
+          exchangeRate 
           return amount * exchangeRate + "€";
         case "USD":
-          exchangeRate = 1.37;
+          exchangeRate 
           return amount * exchangeRate + "$";
         case "JPY":
-          exchangeRate = 150.0;
+          exchangeRate 
           return amount * exchangeRate + "¥";
         default:
           return NaN;
@@ -77,13 +77,13 @@ function convertCurrency(amount, fromCurrency, toCurrency) {
     case "JPY":
       switch (toCurrency) {
         case "EUR":
-          exchangeRate = 0.0077;
+          exchangeRate 
           return amount * exchangeRate + "€";
         case "USD":
-          exchangeRate = 0.0091;
+          exchangeRate 
           return amount * exchangeRate + "$";
         case "GBP":
-          exchangeRate = 0.0067;
+          exchangeRate
           return amount * exchangeRate + "£";
         default:
           return NaN;
@@ -94,4 +94,22 @@ function convertCurrency(amount, fromCurrency, toCurrency) {
   }
 
   return amount * exchangeRate;
+}
+async function getExchange(fromCurrency, toCurrency) {
+  const url = `https://currency-exchange.p.rapidapi.com/exchange?from=${fromCurrency}&to=${toCurrency}`;
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Key': 'e56cb3d176mshd9b8080b057c0cbp10f7b7jsn04af09923bdd',
+      'X-RapidAPI-Host': 'currency-exchange.p.rapidapi.com'
+    }
+  };
+
+  try {
+    const response = await fetch(url, options);
+    const result = await response.json();
+    console.log (result);
+  } catch (error) {
+    console.error(error);
+  }
 }

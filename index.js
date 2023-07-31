@@ -26,7 +26,7 @@ function currencyInputControl(promptMessage) {
 }
 
 function convertCurrency(amount, fromCurrency, toCurrency) {
-  let exchangeRate = 0;
+  let exchangeRate = getExchange();
   
 
   switch (fromCurrency) {
@@ -35,10 +35,8 @@ function convertCurrency(amount, fromCurrency, toCurrency) {
         case "USD":
           return amount * exchangeRate + "$";
         case "GBP":
-          exchangeRate 
           return amount * exchangeRate + "£";
         case "JPY":
-          exchangeRate 
           return amount * exchangeRate + "¥";
         default:
           return NaN;
@@ -47,14 +45,11 @@ function convertCurrency(amount, fromCurrency, toCurrency) {
     case "USD":
       switch (toCurrency) {
         case "EUR":
-          exchangeRate 
           return amount * exchangeRate + "€";
           break;
         case "GBP":
-          exchangeRate 
           return amount * exchangeRate + "£";
         case "JPY":
-          exchangeRate  
           return amount * exchangeRate + "¥";
         default:
           return NaN;
@@ -63,13 +58,10 @@ function convertCurrency(amount, fromCurrency, toCurrency) {
     case "GBP":
       switch (toCurrency) {
         case "EUR":
-          exchangeRate 
           return amount * exchangeRate + "€";
         case "USD":
-          exchangeRate 
           return amount * exchangeRate + "$";
         case "JPY":
-          exchangeRate 
           return amount * exchangeRate + "¥";
         default:
           return NaN;
@@ -77,13 +69,10 @@ function convertCurrency(amount, fromCurrency, toCurrency) {
     case "JPY":
       switch (toCurrency) {
         case "EUR":
-          exchangeRate 
           return amount * exchangeRate + "€";
         case "USD":
-          exchangeRate 
           return amount * exchangeRate + "$";
         case "GBP":
-          exchangeRate
           return amount * exchangeRate + "£";
         default:
           return NaN;
@@ -107,8 +96,8 @@ async function getExchange(fromCurrency, toCurrency) {
 
   try {
     const response = await fetch(url, options);
-    const result = await response.json();
-    console.log (result);
+    const result = await response.json().then(x);
+    return result;
   } catch (error) {
     console.error(error);
   }

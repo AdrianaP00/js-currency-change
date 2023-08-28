@@ -1,6 +1,6 @@
 const prompt = require("prompt-sync")();
-const fetch = require("fetch");
 async function main() {
+
   const amount = parseFloat(prompt("Enter the amount to convert: "));
   let fromCurrency = currencyInputControl(
     "Enter the currency to convert from (EUR, USD, GBP, JPY): "
